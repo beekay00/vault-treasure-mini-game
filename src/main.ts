@@ -70,7 +70,8 @@ handleSprite.interactive = true
 
 app.render()
 
-getUnlockCombination()
+
+const [firstCombinationPair, secondCombinationPair, thirdCombinationPair] = getUnlockCombination()
 
 let firstCombinationUnlock = {
     count: 0,
@@ -129,14 +130,6 @@ const increaseCounterAndVerify = (combinationObject: any, requiredCombinationNum
 }
 
 const verifyRotation = (direction: Direction) => {
-    const [firstCombinationPair, secondCombinationPair, thirdCombinationPair] = [
-        { combinationNumber: combinationNumber, combinationDirection: 'counterclockwise' },
-        { combinationNumber: combinationNumber, combinationDirection: 'clockwise' },
-        { combinationNumber: combinationNumber, combinationDirection: 'counterclockwise' },
-    ] 
-    
-    
-    
     if (direction === Direction.LEFT) verifyCounterClockwiseRotation(firstCombinationPair, thirdCombinationPair)
     else verifyClockwiseRotation(secondCombinationPair)
 }
@@ -194,7 +187,7 @@ handleSprite.on('click', handleHandleClick)
 //    const newWidth = window.innerWidth;
 //    const newHeight = window.innerHeight;
 //  
-//    // Calculate the scale factor for resizing
+//
 //    const scaleX = newWidth / canvasWidth;
 //    const scaleY = newHeight / canvasHeight;
 //    const scale = Math.min(scaleX, scaleY);
