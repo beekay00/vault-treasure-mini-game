@@ -154,8 +154,6 @@ function handleHandleClick(event: MouseEvent) {
         handleSpriteRotation(handleSprite, Direction.RIGHT)
         handleSpriteRotation(handleShadowSprite, Direction.RIGHT)
         verifyRotation(Direction.RIGHT)
-    } else {
-        console.log('Clicked exactly on the center of the door.')
     }
       app.render();
 
@@ -179,6 +177,8 @@ function handleHandleClick(event: MouseEvent) {
 
 handleSprite.interactive = true 
 handleSprite.on('click', handleHandleClick)
+
+//Responsive TODO
 
 //const handleResize = () => {
 //    const canvasWidth = app.view.width;
