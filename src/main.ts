@@ -3,8 +3,7 @@ import * as PIXI from 'pixi.js'
 import { getUnlockCombination } from './utils/utils'
 import { handleSpriteRotation, handleWrongCodeRotation, moveSprite, rotateBlink} from './animations'
 import { getBackgroundSprite, getBlinkSprite, getDoorSprite, getHandleShadowSprite, getHandleSprite, getOpenDoorShadowSprite, getOpenDoorSprite } from './configs'
-import { Direction } from './consts'
-import { SpriteCoordinates } from './types'
+import { Direction, SpriteCoordinates } from './types'
 
 const app = new PIXI.Application({
     backgroundColor: 0x1099bb,
