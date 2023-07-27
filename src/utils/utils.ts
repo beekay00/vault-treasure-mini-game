@@ -3,11 +3,12 @@ import { SECRET_COMBINATION_PAIRS_COUNT } from "../consts"
 const generateRandomNumberInRange = (min: number, max: number): number => Math.floor(Math.random() * ( Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min);
 
 type CombinationObjectArray = Array<{combinationNumber: number, combinationDirection: string}>
-export const combinationNumber = generateRandomNumberInRange(1, 9)
+
 
 export const getUnlockCombination = (): CombinationObjectArray => {
     const combinationArray = []
     for (let i = 0; i < SECRET_COMBINATION_PAIRS_COUNT; i++) {
+      const combinationNumber = generateRandomNumberInRange(1, 9)
       const combinationDirection = i % 2 === 0 ? `counterclockwise` : `clockwise`
   
       const directionObject = { combinationNumber, combinationDirection}
