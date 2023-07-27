@@ -208,31 +208,32 @@ handleSprite.on('click', handleHandleClick)
 //    const doorHeight = 430 * scale; 
 //    doorSprite.width = doorWidth;
 //    doorSprite.height = doorHeight;
-//    doorSprite.x = newWidth / 2 - doorWidth / 2 + 10 * scale; 
-//    doorSprite.y = newHeight / 2 - doorHeight / 2;
+//    doorSprite.x = newWidth / 2 
+//    doorSprite.y = newHeight / 2 
 //  
 //    const handleWidth = 36 * scale; 
 //    const handleHeight = 75 * scale; 
 //    handleSprite.width = handleWidth;
 //    handleSprite.height = handleHeight;
-//    handleSprite.x = newWidth / 2 - handleWidth / 2 + 60 * scale; 
-//    handleSprite.y = newHeight / 2 - handleHeight / 2 + 80 * scale; 
+//    handleSprite.x = newWidth / 2 - handleWidth / 2  * scale; 
+//    handleSprite.y = newHeight / 2 - handleHeight / 2  * scale; 
 //  
 //    const handleShadowWidth = 36 * scale;
 //    const handleShadowHeight = 75 * scale;
 //    handleShadowSprite.width = handleShadowWidth;
 //    handleShadowSprite.height = handleShadowHeight;
-//    handleShadowSprite.x = newWidth / 2 - handleShadowWidth / 2 + 60 * scale;
-//    handleShadowSprite.y = newHeight / 2 - handleShadowHeight / 2 + 90 * scale;
+//    handleShadowSprite.x = newWidth / 2 - handleShadowWidth / 2  * scale;
+//    handleShadowSprite.y = newHeight / 2 - handleShadowHeight / 2  * scale;
 //  
 //    const firstBlinkSpriteWidth = 50 * scale; 
 //    const firstBlinkSpriteHeight = 50 * scale; 
 //    firstBlinkSprite.width = firstBlinkSpriteWidth;
 //    firstBlinkSprite.height = firstBlinkSpriteHeight;
-//    firstBlinkSprite.x = newWidth / 2 - firstBlinkSpriteWidth / 2 - 30 * scale; 
-//    firstBlinkSprite.y = newHeight / 2 - firstBlinkSpriteHeight / 2 + 15 * scale; 
+//    firstBlinkSprite.x = newWidth / 2 - firstBlinkSpriteWidth / 2  * scale; 
+//    firstBlinkSprite.y = newHeight / 2 - firstBlinkSpriteHeight / 2  * scale; 
 //  
 //    app.render();
 //  };
 //  window.addEventListener('resize', handleResize);
+
 
