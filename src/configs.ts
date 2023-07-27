@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import { SpriteCoordinates } from './types'
 
 export const getHandleSprite = (centerX: number, centerY: number): PIXI.Sprite => {
     const handleTexture = PIXI.Texture.from('public/assets/handle.png')
@@ -58,8 +59,6 @@ export const getDoorSprite = (centerX: number, centerY: number): PIXI.Sprite => 
 
     return doorSprite
 }
-
-export type SpriteCoordinates = { x: number; y: number; width?: number; height?: number }
 
 export const getBlinkSprite = (coordinates: SpriteCoordinates): PIXI.Sprite => {
     const blinkTexture = PIXI.Texture.from('public/assets/blink.png')

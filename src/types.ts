@@ -1,0 +1,1 @@
+export type SpriteCoordinates = { x: number; y: number; width?: number; height?: number }
