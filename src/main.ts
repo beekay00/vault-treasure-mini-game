@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js'
 
-import { getUnlockCombination, combinationNumber } from './utils/utils'
+import { getUnlockCombination } from './utils/utils'
 import { handleSpriteRotation, handleWrongCodeRotation, moveSprite, rotateBlink} from './animations'
 import { SpriteCoordinates, getBackgroundSprite, getBlinkSprite, getDoorSprite, getHandleShadowSprite, getHandleSprite, getOpenDoorShadowSprite, getOpenDoorSprite } from './configs'
 import { Direction } from './consts'
