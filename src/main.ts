@@ -134,6 +134,16 @@ const verifyRotation = (direction: Direction) => {
     else verifyClockwiseRotation(secondCombinationPair)
 }
 
+function openDoor() {
+    setTimeout(() => {
+        openedDoorSprite.visible = true;
+        openedDoorShadowSprite.visible = true;
+        doorSprite.visible = false;
+        handleSprite.visible = false;
+        handleShadowSprite.visible = false;
+      }, 850);
+}  
+
 function handleHandleClick(event: MouseEvent) {
     const x = event.clientX
     if (x < 967) {
@@ -147,17 +157,6 @@ function handleHandleClick(event: MouseEvent) {
     } else {
         console.log('Clicked exactly on the center of the door.')
     }
-
-    function openDoor() {
-        setTimeout(() => {
-            openedDoorSprite.visible = true;
-            openedDoorShadowSprite.visible = true;
-            doorSprite.visible = false;
-            handleSprite.visible = false;
-            handleShadowSprite.visible = false;
-          }, 850);
-    }  
-
       app.render();
 
     const isUnlocked = firstCombinationUnlock.isPassed && secondCombinationUnlock.isPassed && thirdCombinationUnlock.isPassed
