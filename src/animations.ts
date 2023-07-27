@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js'
 import { gsap } from 'gsap'
-import { Direction } from './consts'
+import { Direction } from './types'
 
 export function rotateSprite(sprite: PIXI.Sprite, rotationDirection: gsap.TweenValue | undefined, rotationDuration: gsap.TweenValue | undefined = 1) {
     gsap.to(sprite, {
