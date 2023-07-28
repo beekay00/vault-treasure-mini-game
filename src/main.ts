@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js'
-
+import { gsap } from 'gsap'
 import { getUnlockCombination } from './utils/utils'
 import { handleSpriteRotation, handleWrongCodeRotation, moveSprite, rotateBlink} from './animations'
 import { getBackgroundSprite, getBlinkSprite, getDoorSprite, getHandleShadowSprite, getHandleSprite, getOpenDoorShadowSprite, getOpenDoorSprite } from './configs'
@@ -133,16 +133,76 @@ const verifyRotation = (direction: Direction) => {
     if (direction === Direction.LEFT) verifyCounterClockwiseRotation(firstCombinationPair, thirdCombinationPair)
     else verifyClockwiseRotation(secondCombinationPair)
 }
+//function openDoor() {
+//    setTimeout(() => {
+//        openedDoorSprite.visible = true;
+//        openedDoorShadowSprite.visible = true;
+//        doorSprite.visible = false;
+//        handleSprite.visible = false;
+//        handleShadowSprite.visible = false;
+//      }, 850);
+//}
+//function openDoorAnimation() {
+//
+//    const animationDuration = 2;
+//
+//    gsap.to(doorSprite.scale, { 
+//        x: 0, 
+//        duration: animationDuration, 
+//        ease: 'power1.inOut',
+//    });
+//    setTimeout(() => {
+//        openedDoorSprite.visible = true;
+//    }, 2000)
+//    
+//}
+  
 
-function openDoor() {
-    setTimeout(() => {
-        openedDoorSprite.visible = true;
-        openedDoorShadowSprite.visible = true;
-        doorSprite.visible = false;
-        handleSprite.visible = false;
-        handleShadowSprite.visible = false;
-      }, 850);
-}  
+function fadeOutAndFadeInAnimation() {
+    const animationDuration = 2;
+  
+    openedDoorSprite.alpha = 0;
+    openedDoorSprite.visible = true;
+    openedDoorShadowSprite.alpha = 0;
+    openedDoorShadowSprite.visible = true;
+  
+    gsap.to(doorSprite, {
+      alpha: 0,
+      duration: animationDuration,
+      ease: 'power2.inOut',
+    });
+
+    gsap.to(handleSprite, {
+        alpha: 0,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+    });
+
+    gsap.to(handleShadowSprite, {
+        alpha: 0,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+      });
+
+    gsap.to(doorSprite, {
+        alpha: 0,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+      });
+  
+    gsap.to(openedDoorSprite, {
+      alpha: 1,
+      duration: animationDuration,
+      ease: 'power2.inOut',
+    });
+
+    gsap.to(openedDoorShadowSprite, {
+        alpha: 1,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+      });
+  }
+  
 
 function handleHandleClick(event: MouseEvent) {
     const x = event.clientX
@@ -160,13 +220,16 @@ function handleHandleClick(event: MouseEvent) {
     const isUnlocked = firstCombinationUnlock.isPassed && secondCombinationUnlock.isPassed && thirdCombinationUnlock.isPassed
 
     if (isUnlocked) {
-        openDoor();
+        //openDoor()
+        //openDoorAnimation()
+        fadeOutAndFadeInAnimation()
         setTimeout(() => {
-            openedDoorSprite.visible = false;
-            openedDoorShadowSprite.visible = false;
-            doorSprite.visible = true;
-            handleSprite.visible = true;
-            handleShadowSprite.visible = true;
+            //openedDoorSprite.visible = false;
+            //openedDoorShadowSprite.visible = false;
+            //doorSprite.visible = true;
+            //handleSprite.visible = true;
+            //handleShadowSprite.visible = true;
+
             resetToDefault()
             handleWrongCodeRotation(handleSprite, Direction.RIGHT)
             handleWrongCodeRotation(handleShadowSprite, Direction.RIGHT)
@@ -227,5 +290,3 @@ handleSprite.on('click', handleHandleClick)
 //    app.render();
 //  };
 //  window.addEventListener('resize', handleResize);
-
-
