@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import { gsap } from 'gsap'
 import { getUnlockCombination } from './utils/utils'
-import { handleSpriteRotation, handleWrongCodeRotation, moveSprite, rotateBlink} from './animations'
+import { handleSpriteRotation, handleWrongCodeRotation, moveSprite, rotateBlink } from './animations'
 import { getBackgroundSprite, getBlinkSprite, getDoorSprite, getHandleShadowSprite, getHandleSprite, getOpenDoorShadowSprite, getOpenDoorSprite } from './configs'
 import { Direction, SpriteCoordinates } from './types'
 
@@ -11,7 +11,6 @@ const app = new PIXI.Application({
     height: 700,
 })
 document.body.appendChild(app.view as any)
-
 
 const container = new PIXI.Container()
 app.stage.addChild(container)
@@ -34,12 +33,12 @@ const doorSprite = getDoorSprite(centerX, centerY)
 container.addChild(doorSprite)
 
 const openedDoorShadowSprite = getOpenDoorShadowSprite(centerX, centerY)
-openedDoorShadowSprite.visible = false;
+openedDoorShadowSprite.visible = false
 container.addChild(openedDoorShadowSprite)
-moveSprite(openedDoorShadowSprite, Direction.LEFT);
+moveSprite(openedDoorShadowSprite, Direction.LEFT)
 
 const openedDoorSprite = getOpenDoorSprite(centerX, centerY)
-openedDoorSprite.visible = false;
+openedDoorSprite.visible = false
 container.addChild(openedDoorSprite)
 moveSprite(openedDoorSprite, Direction.LEFT)
 
@@ -69,7 +68,6 @@ handleShadowSprite.anchor.set(0.5)
 handleSprite.interactive = true
 
 app.render()
-
 
 const [firstCombinationPair, secondCombinationPair, thirdCombinationPair] = getUnlockCombination()
 
@@ -133,6 +131,7 @@ const verifyRotation = (direction: Direction) => {
     if (direction === Direction.LEFT) verifyCounterClockwiseRotation(firstCombinationPair, thirdCombinationPair)
     else verifyClockwiseRotation(secondCombinationPair)
 }
+
 //function openDoor() {
 //    setTimeout(() => {
 //        openedDoorSprite.visible = true;
@@ -146,63 +145,110 @@ const verifyRotation = (direction: Direction) => {
 //
 //    const animationDuration = 2;
 //
-//    gsap.to(doorSprite.scale, { 
-//        x: 0, 
-//        duration: animationDuration, 
+//    gsap.to(doorSprite.scale, {
+//        x: 0,
+//        duration: animationDuration,
 //        ease: 'power1.inOut',
 //    });
 //    setTimeout(() => {
 //        openedDoorSprite.visible = true;
 //    }, 2000)
-//    
+//
 //}
-  
 
-function fadeOutAndFadeInAnimation() {
-    const animationDuration = 2;
-  
-    openedDoorSprite.alpha = 0;
-    openedDoorSprite.visible = true;
-    openedDoorShadowSprite.alpha = 0;
-    openedDoorShadowSprite.visible = true;
-  
+function fadeInAndFadeOutAnimation() {
+    const animationDuration = 2
+
+    openedDoorSprite.alpha = 0
+    openedDoorSprite.visible = true
+
+    openedDoorShadowSprite.alpha = 0
+    openedDoorShadowSprite.visible = true
+
     gsap.to(doorSprite, {
-      alpha: 0,
-      duration: animationDuration,
-      ease: 'power2.inOut',
-    });
+        alpha: 0,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+    })
 
     gsap.to(handleSprite, {
         alpha: 0,
         duration: animationDuration,
         ease: 'power2.inOut',
-    });
+    })
 
     gsap.to(handleShadowSprite, {
         alpha: 0,
         duration: animationDuration,
         ease: 'power2.inOut',
-      });
+    })
 
     gsap.to(doorSprite, {
         alpha: 0,
         duration: animationDuration,
         ease: 'power2.inOut',
-      });
-  
+    })
+
     gsap.to(openedDoorSprite, {
-      alpha: 1,
-      duration: animationDuration,
-      ease: 'power2.inOut',
-    });
+        alpha: 1,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+    })
 
     gsap.to(openedDoorShadowSprite, {
         alpha: 1,
         duration: animationDuration,
         ease: 'power2.inOut',
-      });
-  }
-  
+        onComplete: () => {
+            setTimeout(() => {
+                closingDoorAnimation()
+            }, 5000)
+        },
+    })
+}
+
+function closingDoorAnimation() {
+    const animationDuration = 2
+    doorSprite.alpha = 0
+    doorSprite.visible = true
+    doorSprite.alpha = 0
+    doorSprite.visible = true
+    handleSprite.alpha = 0
+    handleSprite.visible = true
+    handleShadowSprite.alpha = 0
+    handleShadowSprite.visible = true
+    gsap.to(doorSprite, {
+        alpha: 1,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+    })
+    gsap.to(handleSprite, {
+        alpha: 1,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+    })
+    gsap.to(handleShadowSprite, {
+        alpha: 1,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+    })
+    gsap.to(openedDoorSprite, {
+        alpha: 0,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+    })
+    gsap.to(openedDoorShadowSprite, {
+        alpha: 0,
+        duration: animationDuration,
+        ease: 'power2.inOut',
+        onComplete: () => {
+            resetToDefault()
+            handleWrongCodeRotation(handleSprite, Direction.RIGHT)
+            handleWrongCodeRotation(handleShadowSprite, Direction.RIGHT)
+            getUnlockCombination()
+        },
+    })
+}
 
 function handleHandleClick(event: MouseEvent) {
     const x = event.clientX
@@ -215,30 +261,16 @@ function handleHandleClick(event: MouseEvent) {
         handleSpriteRotation(handleShadowSprite, Direction.RIGHT)
         verifyRotation(Direction.RIGHT)
     }
-      app.render();
+    app.render()
 
     const isUnlocked = firstCombinationUnlock.isPassed && secondCombinationUnlock.isPassed && thirdCombinationUnlock.isPassed
 
     if (isUnlocked) {
-        //openDoor()
-        //openDoorAnimation()
-        fadeOutAndFadeInAnimation()
-        setTimeout(() => {
-            //openedDoorSprite.visible = false;
-            //openedDoorShadowSprite.visible = false;
-            //doorSprite.visible = true;
-            //handleSprite.visible = true;
-            //handleShadowSprite.visible = true;
-
-            resetToDefault()
-            handleWrongCodeRotation(handleSprite, Direction.RIGHT)
-            handleWrongCodeRotation(handleShadowSprite, Direction.RIGHT)
-        }, 5000);
-        getUnlockCombination();
+        fadeInAndFadeOutAnimation()
     }
 }
 
-handleSprite.interactive = true 
+handleSprite.interactive = true
 handleSprite.on('click', handleHandleClick)
 
 //Responsive TODO
@@ -248,45 +280,45 @@ handleSprite.on('click', handleHandleClick)
 //    const canvasHeight = app.view.height;
 //    const newWidth = window.innerWidth;
 //    const newHeight = window.innerHeight;
-//  
+//
 //
 //    const scaleX = newWidth / canvasWidth;
 //    const scaleY = newHeight / canvasHeight;
 //    const scale = Math.min(scaleX, scaleY);
-//  
+//
 //    app.renderer.resize(newWidth, newHeight);
-//  
+//
 //    backgroundSprite.width = newWidth;
 //    backgroundSprite.height = newHeight;
-//  
-//    const doorWidth = 450 * scale; 
-//    const doorHeight = 430 * scale; 
+//
+//    const doorWidth = 450 * scale;
+//    const doorHeight = 430 * scale;
 //    doorSprite.width = doorWidth;
 //    doorSprite.height = doorHeight;
-//    doorSprite.x = newWidth / 2 
-//    doorSprite.y = newHeight / 2 
-//  
-//    const handleWidth = 36 * scale; 
-//    const handleHeight = 75 * scale; 
+//    doorSprite.x = newWidth / 2
+//    doorSprite.y = newHeight / 2
+//
+//    const handleWidth = 36 * scale;
+//    const handleHeight = 75 * scale;
 //    handleSprite.width = handleWidth;
 //    handleSprite.height = handleHeight;
-//    handleSprite.x = newWidth / 2 - handleWidth / 2  * scale; 
-//    handleSprite.y = newHeight / 2 - handleHeight / 2  * scale; 
-//  
+//    handleSprite.x = newWidth / 2 - handleWidth / 2  * scale;
+//    handleSprite.y = newHeight / 2 - handleHeight / 2  * scale;
+//
 //    const handleShadowWidth = 36 * scale;
 //    const handleShadowHeight = 75 * scale;
 //    handleShadowSprite.width = handleShadowWidth;
 //    handleShadowSprite.height = handleShadowHeight;
 //    handleShadowSprite.x = newWidth / 2 - handleShadowWidth / 2  * scale;
 //    handleShadowSprite.y = newHeight / 2 - handleShadowHeight / 2  * scale;
-//  
-//    const firstBlinkSpriteWidth = 50 * scale; 
-//    const firstBlinkSpriteHeight = 50 * scale; 
+//
+//    const firstBlinkSpriteWidth = 50 * scale;
+//    const firstBlinkSpriteHeight = 50 * scale;
 //    firstBlinkSprite.width = firstBlinkSpriteWidth;
 //    firstBlinkSprite.height = firstBlinkSpriteHeight;
-//    firstBlinkSprite.x = newWidth / 2 - firstBlinkSpriteWidth / 2  * scale; 
-//    firstBlinkSprite.y = newHeight / 2 - firstBlinkSpriteHeight / 2  * scale; 
-//  
+//    firstBlinkSprite.x = newWidth / 2 - firstBlinkSpriteWidth / 2  * scale;
+//    firstBlinkSprite.y = newHeight / 2 - firstBlinkSpriteHeight / 2  * scale;
+//
 //    app.render();
 //  };
 //  window.addEventListener('resize', handleResize);
