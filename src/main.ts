@@ -9,7 +9,31 @@ const app = new PIXI.Application({
     backgroundColor: 0x1099bb,
     width: 1350,
     height: 700,
-})
+});
+
+//const renderer = PIXI.autoDetectRenderer({
+//    view: app.view, 
+//    width: window.innerWidth,
+//    height: window.innerHeight,
+//});
+//
+//window.addEventListener('resize', () => {
+//    const newWidth = window.innerWidth;
+//    const newHeight = window.innerHeight;
+//
+//    renderer.resize(newWidth, newHeight);
+//
+//    const scaleX = newWidth / 1350; 
+//    const scaleY = newHeight / 700; 
+//    const scale = Math.min(scaleX, scaleY);
+//
+//    
+//    handleShadowSprite.width = 156 * scale
+//    handleShadowSprite.height = 167 * scale; 
+//    handleShadowSprite.x = 667 * scale; 
+//    handleShadowSprite.y = 346 * scale; 
+//});
+
 document.body.appendChild(app.view as any)
 
 const container = new PIXI.Container()

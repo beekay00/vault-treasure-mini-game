@@ -6,8 +6,8 @@ export const getHandleSprite = (centerX: number, centerY: number): PIXI.Sprite =
     const handleSprite = new PIXI.Sprite(handleTexture)
     handleSprite.width = 165
     handleSprite.height = 170
-    handleSprite.x = centerX - handleSprite.width / 2 + 72
-    handleSprite.y = centerY - handleSprite.height / 2 + 72
+    handleSprite.x = centerX - handleSprite.width / 2 + 70;
+    handleSprite.y = centerY - handleSprite.height / 2 + 70;
 
     return handleSprite
 }
@@ -17,10 +17,10 @@ export const getHandleShadowSprite = (centerX: number, centerY: number): PIXI.Sp
     const handleShadowSprite = new PIXI.Sprite(handleShadowTexture)
     handleShadowSprite.width = 156
     handleShadowSprite.height = 167
-    handleShadowSprite.x = centerX - handleShadowSprite.width / 2 + 70
-    handleShadowSprite.y = centerY - handleShadowSprite.height / 2 + 80
+    handleShadowSprite.x = centerX - handleShadowSprite.width / 2 + 70;
+    handleShadowSprite.y = centerY - handleShadowSprite.height / 2 + 78;;
 
-    return handleShadowSprite
+    return handleShadowSprite;
 }
 
 export const getOpenDoorShadowSprite = (centerX: number, centerY: number): PIXI.Sprite => {
