@@ -16,7 +16,7 @@ const app = new PIXI.Application({
 //    width: window.innerWidth,
 //    height: window.innerHeight,
 //});
-//
+
 //window.addEventListener('resize', () => {
 //    const newWidth = window.innerWidth;
 //    const newHeight = window.innerHeight;
